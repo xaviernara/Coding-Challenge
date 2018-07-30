@@ -11,6 +11,8 @@ public class groceryStore{
    private Scanner groceryListReader;
    final List<String> groceriesArraylist = new ArrayList<String>();
    final List<String> sortedGroceriesArraylist = new ArrayList<String>();
+   
+   
 
    final List<String> importedGroceriesArraylist = new ArrayList<String>();
    final List<String> unimportedGroceriesArraylist = new ArrayList<String>();
@@ -185,7 +187,23 @@ public class groceryStore{
             
                 //while(scanner.hasNextInt())
                  int res = new Scanner(imported).useDelimiter("\\D+").nextInt();
-                 //System.out.println(res);
+                 //System.out.println("Imported Quantity: " +res);
+                 
+                 double importedPrices = 0.0;
+            
+                  //this pattern extracts the doubles from the strings from the text files
+                  Pattern p = Pattern.compile("\\d+\\.\\d+");
+                  Matcher m = p.matcher(imported);
+                        
+            while(m.find()){
+            
+               importedPrices = Double.parseDouble(m.group(0));
+               
+               //System.out.println("Price: " +m.group(0));
+               //System.out.println("Price: " + importedPrices);
+
+            }
+
                  
                  
                  
@@ -229,13 +247,35 @@ public class groceryStore{
 
             */
             
-            //this p
+            int res = new Scanner(unimported).useDelimiter("\\D+").nextInt();
+            //System.out.println("Unimported Quantity: " +res);
+
+            
+            
+            
+            double unimportedPrices = 0.0;
+            double totalUnimportedPrices =0.0;
+            
+            //this pattern extracts the doubles from the strings from the text files
             Pattern p = Pattern.compile("\\d+\\.\\d+");
             Matcher m = p.matcher(unimported);
             
+            
+                        
             while(m.find()){
             
-               System.out.println("Price: " +m.group(0));
+               unimportedPrices = Double.parseDouble(m.group(0));
+               totalUnimportedPrices = totalUnimportedPrices + unimportedPrices;
+               
+             
+               
+               //System.out.println("Price: " +m.group(0));
+               //System.out.println("Unimported Price: " +Math.ceil((unimportedPrices)));
+
+               //System.out.printf("Unimported Price: %.2f %n" +unimportedPrices * .10 );
+               
+               System.out.println("Unimported Total: " +totalUnimportedPrices);
+
 
             }
 
