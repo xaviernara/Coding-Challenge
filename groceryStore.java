@@ -254,19 +254,25 @@ public class groceryStore{
             
             
             double unimportedPrices = 0.0;
-            double totalUnimportedPrices =0.0;
+            double totalUP =0.0;
             
             //this pattern extracts the doubles from the strings from the text files
             Pattern p = Pattern.compile("\\d+\\.\\d+");
             Matcher m = p.matcher(unimported);
             
             
+            List <Double> totalUnimportedPrices = new ArrayList<Double>();
+            Iterator<Double> groceryIterator = totalUnimportedPrices.iterator();
+
                         
             while(m.find()){
             
-               unimportedPrices = Double.parseDouble(m.group(0));
-               totalUnimportedPrices = totalUnimportedPrices + unimportedPrices;
                
+            
+               unimportedPrices = Double.parseDouble(m.group(0));
+               totalUnimportedPrices.add(unimportedPrices);
+               
+                              
              
                
                //System.out.println("Price: " +m.group(0));
@@ -274,10 +280,24 @@ public class groceryStore{
 
                //System.out.printf("Unimported Price: %.2f %n" +unimportedPrices * .10 );
                
-               System.out.println("Unimported Total: " +totalUnimportedPrices);
+               System.out.println("Unimported Price: " +totalUnimportedPrices);
+               
+               //totalUP = totalUP+totalUnimportedPrices;
+               //System.out.println("Unimported Total: " +totalUP);
 
+               
 
             }
+            
+            while (groceryIterator.hasNext()){
+               
+               
+                  totalUP = totalUP+groceryIterator.next();
+                  System.out.println("Unimported Total: " +totalUP);
+
+               }
+
+            
 
          
          }
