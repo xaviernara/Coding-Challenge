@@ -261,13 +261,12 @@ public class groceryStore{
             Matcher priceMatcher = pricePattern.matcher(unimported);
             
             //Pattern x = Pattern.parsePattern(unimported.substring(0,1));
-            String x = unimported.substring(0,1);
+            //String x = unimported.substring(0,1);
             //System.out.println("hey: "+x);
 
             
             //this pattern extracts the unimported item name from the strings from the text files
-            Pattern itemNamePattern = Pattern.compile(x+"(.*?)"+"at");
-;
+            Pattern itemNamePattern = Pattern.compile(res+"(.*?)"+"at");
             Matcher itemNameMatcher = pricePattern.matcher(unimported);
 
             
