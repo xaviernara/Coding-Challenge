@@ -256,20 +256,31 @@ public class groceryStore{
             double unimportedPrices = 0.0;
             double totalUP =0.0;
             
-            //this pattern extracts the doubles from the strings from the text files
-            Pattern p = Pattern.compile("\\d+\\.\\d+");
-            Matcher m = p.matcher(unimported);
+           //this pattern extracts the doubles from the strings from the text files
+            Pattern pricePattern = Pattern.compile("\\d+\\.\\d+");
+            Matcher priceMatcher = pricePattern.matcher(unimported);
+            
+            //Pattern x = Pattern.parsePattern(unimported.substring(0,1));
+            String x = unimported.substring(0,1);
+            //System.out.println("hey: "+x);
+
+            
+            //this pattern extracts the unimported item name from the strings from the text files
+            Pattern itemNamePattern = Pattern.compile(x+"(.*?)"+"at");
+;
+            Matcher itemNameMatcher = pricePattern.matcher(unimported);
+
             
             
             List <Double> totalUnimportedPrices = new ArrayList<Double>();
             Iterator<Double> groceryIterator = totalUnimportedPrices.iterator();
 
                         
-            while(m.find()){
+            while(priceMatcher.find()){
             
                
             
-               unimportedPrices = Double.parseDouble(m.group(0));
+               unimportedPrices = Double.parseDouble(priceMatcher.group(0));
                totalUnimportedPrices.add(unimportedPrices);
                
                               
@@ -280,7 +291,7 @@ public class groceryStore{
 
                //System.out.printf("Unimported Price: %.2f %n" +unimportedPrices * .10 );
                
-               System.out.println("Unimported Price: " +totalUnimportedPrices);
+               System.out.println("Unimported Price: " +totalUnimportedPrices );
                
                //totalUP = totalUP+totalUnimportedPrices;
                //System.out.println("Unimported Total: " +totalUP);
@@ -289,6 +300,7 @@ public class groceryStore{
 
             }
             
+            /*
             while (groceryIterator.hasNext()){
                
                
@@ -297,8 +309,16 @@ public class groceryStore{
 
                }
 
+            */
             
+            
+                      
+              while(itemNameMatcher.find()){
+               System.out.println("Item name: "+itemNameMatcher.group(0));
+            
+            }
 
+            
          
          }
 
