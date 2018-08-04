@@ -186,7 +186,10 @@ public class groceryStore{
                //Scanner scanner = new Scanner(imported).useDelimiter("\\D+").nextInt();
             
                 //while(scanner.hasNextInt())
-                 int res = new Scanner(imported).useDelimiter("\\D+").nextInt();
+                //this extracts the quantity(ie the 1st number on each string) from the grocery list
+                  int res = new Scanner(imported).useDelimiter("\\D+").nextInt();
+                  
+                  
                  //System.out.println("Imported Quantity: " +res);
                  
                  double importedPrices = 0.0;
@@ -247,13 +250,14 @@ public class groceryStore{
 
             */
             
+            //this extracts the quantity(ie the 1st number on each string) from the grocery list
             int res = new Scanner(unimported).useDelimiter("\\D+").nextInt();
             //System.out.println("Unimported Quantity: " +res);
 
             
             
             
-            double unimportedPrices = 0.0;
+            double unimportedPrices = 0.0f;
             double totalUP =0.0;
             
            //this pattern extracts the doubles from the strings from the text files
@@ -264,12 +268,12 @@ public class groceryStore{
             //String x = unimported.substring(0,1);
             //System.out.println("hey: "+x);
 
-            
-            //this pattern extracts the unimported item name from the strings from the text files
-            Pattern itemNamePattern = Pattern.compile(res+"(.*?)"+"at");
-            Matcher itemNameMatcher = pricePattern.matcher(unimported);
+            //this replaces all occurrences of "at #.##" and replace them with ":"+z
+            //String replaceString= x.replaceAll("at "unimportedPrices+,":"+z);
 
-            
+                        
+             //this converts the double into string and formats it to have 2 decimal points 
+             //String z = String.format ("%.2f", unimportedPrices);
             
             List <Double> totalUnimportedPrices = new ArrayList<Double>();
             Iterator<Double> groceryIterator = totalUnimportedPrices.iterator();
@@ -290,10 +294,26 @@ public class groceryStore{
 
                //System.out.printf("Unimported Price: %.2f %n" +unimportedPrices * .10 );
                
-               System.out.println("Unimported Price: " +totalUnimportedPrices );
+               //System.out.println("Unimported Price: " +totalUnimportedPrices );
                
+               //this converts the double into string and formats it to have 2 decimal points 
+               //String z = String.format ("%.2f", unimportedPrices);
+               String z = String.format ("%.2f", unimportedPrices*3);
+               System.out.println(z);
+
+
+               
+                //this replaces all occurrences of "at #.##" and replace them with ":"+ variable
+                String replaceString= unimported.replaceAll("at "+unimportedPrices,":"+z);
+                
+                //System.out.println(replaceString);
+
+
+               //totalUP = unimportedPrices +unimportedPrices;
+
+              
                //totalUP = totalUP+totalUnimportedPrices;
-               //System.out.println("Unimported Total: " +totalUP);
+               System.out.println("Unimported Total: " +totalUP);
 
                
 
@@ -311,13 +331,21 @@ public class groceryStore{
             */
             
             
-                      
+            
+            /*
+            //this pattern extracts the unimported item name from the strings from the text files
+            Pattern itemNamePattern = Pattern.compile(res+"(.*?)"+"at");
+            Matcher itemNameMatcher = pricePattern.matcher(unimported);
+            */
+
+            
+            /*          
               while(itemNameMatcher.find()){
                System.out.println("Item name: "+itemNameMatcher.group(0));
             
             }
 
-            
+            */
          
          }
 
