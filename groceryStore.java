@@ -16,6 +16,10 @@ public class groceryStore{
 
    final List<String> importedGroceriesArraylist = new ArrayList<String>();
    final List<String> unimportedGroceriesArraylist = new ArrayList<String>();
+   
+   boolean isTaxable = false;
+   boolean isImported = false;
+   
 
 
    
@@ -158,6 +162,127 @@ public class groceryStore{
          }
          */
          
+         
+         /*
+         //this extracts the quantity(ie the 1st number on each string) from the grocery list
+         public int quantityExtract(String groceryList){
+         
+            try{
+            
+               int groceryQuantity = new Scanner(groceryList).useDelimiter("\\D+").nextInt();
+               System.out.println("Quantity: " +groceryQuantity);
+               
+               return groceryQuantity;           
+            }
+            
+            catch(Exception e){
+            
+               System.out.println("Could not find quantity");
+            }       
+         }
+         */
+         
+         
+         /*
+         //this method extracts the price from the strings from the text files
+         public double priceExtract(String groceryList){
+         
+            double unimportedPrices = 0.0;
+            List <Double> totalUnimportedPrices = new ArrayList<Double>();
+
+         
+            //this pattern extracts the doubles from the strings from the text files
+            Pattern pricePattern = Pattern.compile("\\d+\\.\\d+");
+            Matcher priceMatcher = pricePattern.matcher(unimported);
+            
+            while(priceMatcher.find()){
+            
+               
+            
+               unimportedPrices = Double.parseDouble(priceMatcher.group(0));
+               totalUnimportedPrices.add(unimportedPrices);
+               
+                              
+          
+               //System.out.println("Price: " +priceMatcher.group(0));
+               System.out.println("Price: " +totalUnimportedPrices);
+
+                
+                             
+               //this converts the double into string and formats it to have 2 decimal points 
+               //String z = String.format ("%.2f", unimportedPrices*2);
+               System.out.println("string prices multiplied:"+z);
+
+
+               
+                //this replaces all occurrences of "at #.##" and replace them with ":"+ variable
+                String replaceString= unimported.replaceAll("at "+unimportedPrices,":"+z);
+                
+                System.out.println("Replaced string: "+replaceString);
+
+
+               //totalUP = unimportedPrices +unimportedPrices;
+
+              
+               //totalUP = totalUP+totalUnimportedPrices;
+               //System.out.println("Unimported Total: " +totalUP);
+
+               
+
+            }
+            
+            return totalUnimportedPrices;
+
+         }
+         */
+         
+         public String salesTaxApplied(double groceryPrice){
+         
+            
+            //this converts the double into string and formats it to have 2 decimal points 
+            String groceryPriceAfterTax = String.format ("%.2f", groceryPrice);
+            System.out.println("string prices multiplied:"+groceryPriceAfterTax);
+
+         
+            return groceryPriceAfterTax;
+         }
+         
+         public void untaxableItems (String groceryList ){
+         
+            List<String> untaxableGroceriesArraylist = new ArrayList<String>();
+            untaxableGroceriesArraylist.asList("music","chocolate","book","pills");
+            //untaxableGroceriesArraylist.add("book");
+            //untaxableGroceriesArraylist.add("pills");
+            
+            
+            
+            Iterator<String> groceryIterator = untaxableGroceriesArraylist.iterator();
+                     
+            //for (int i =0; i<x.length; i++){
+            
+            while (groceryIterator.hasNext()) {           
+               if (groceryList.contains(groceryIterator.next())){
+                  isTaxable = false;
+                  //System.out.println(groceryIterator.next() + "\nposition: "+importedPosition);
+                  System.out.println("item isn't taxable");
+                  
+                 }
+                 
+                 else{
+                 
+                     isTaxable = true;
+                     System.out.println("item is taxable");
+
+                 }
+                 //importedPosition++;
+            }
+
+
+
+         
+         }
+         
+         
          public void importedGrocerySorter(String imported){
          
             
@@ -186,7 +311,8 @@ public class groceryStore{
                //Scanner scanner = new Scanner(imported).useDelimiter("\\D+").nextInt();
             
                 //while(scanner.hasNextInt())
-                //this extracts the quantity(ie the 1st number on each string) from the grocery list
+                
+                  //this extracts the quantity(ie the 1st number on each string) from the grocery list
                   int res = new Scanner(imported).useDelimiter("\\D+").nextInt();
                   
                   
@@ -224,7 +350,7 @@ public class groceryStore{
          public void unimportedGrocerySorter(String unimported){
          
              unimportedGroceriesArraylist.add(unimported);
-             //System.out.println(unimported);
+             System.out.println("ALL UNINPORTED: "+unimported);
              //System.out.println("////////////////////\n"+unimportedGroceriesArraylist);
              
              /*
@@ -287,33 +413,32 @@ public class groceryStore{
                totalUnimportedPrices.add(unimportedPrices);
                
                               
-             
-               
-               //System.out.println("Price: " +m.group(0));
-               //System.out.println("Unimported Price: " +Math.ceil((unimportedPrices)));
+          
+               //System.out.println("Price: " +priceMatcher.group(0));
+               System.out.println("Price: " +totalUnimportedPrices);
 
-               //System.out.printf("Unimported Price: %.2f %n" +unimportedPrices * .10 );
                
+               
+              
                //System.out.println("Unimported Price: " +totalUnimportedPrices );
                
                //this converts the double into string and formats it to have 2 decimal points 
-               //String z = String.format ("%.2f", unimportedPrices);
-               String z = String.format ("%.2f", unimportedPrices*3);
-               System.out.println(z);
+               String z = String.format ("%.2f", unimportedPrices*2);  
+               System.out.println("string prices multiplied:"+z);
 
 
                
                 //this replaces all occurrences of "at #.##" and replace them with ":"+ variable
                 String replaceString= unimported.replaceAll("at "+unimportedPrices,":"+z);
                 
-                //System.out.println(replaceString);
+                System.out.println("Replaced string: "+replaceString);
 
 
                //totalUP = unimportedPrices +unimportedPrices;
 
               
                //totalUP = totalUP+totalUnimportedPrices;
-               System.out.println("Unimported Total: " +totalUP);
+               //System.out.println("Unimported Total: " +totalUP);
 
                
 
