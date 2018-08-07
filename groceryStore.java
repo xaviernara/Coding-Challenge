@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 import java.util.Arrays;
-import static java.util.Arrays.asList;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.Iterator;
@@ -12,101 +12,69 @@ public class groceryStore{
    final List<String> groceriesArraylist = new ArrayList<String>();
    final List<String> sortedGroceriesArraylist = new ArrayList<String>();
    
-   
+   Iterator<String> groceryIterator = groceriesArraylist.iterator();
+
 
    final List<String> importedGroceriesArraylist = new ArrayList<String>();
    final List<String> unimportedGroceriesArraylist = new ArrayList<String>();
    
-   boolean isTaxable = false;
+   boolean isTaxable = true;
    boolean isImported = false;
    
-
-
-   
-   //this methods opens the groceryList file 
-      /*
-      public void openFile(){
-         
-         try{
-            groceryListReader = new Scanner(new File("grocery_list.txt"));
-         }
-         catch (Exception e){
-       		System.out.println("Could not find file");
-       	}
-         
-      }
-      
-      
-      //this method reads the contents from the groceryList file and puts them 
-      //into a arraylist of strings
-
-      /*
-      public void readFile(){
-      
-         boolean whiteSpace = false;
-      
-             
-         while(groceryListReader.hasNextLine()){
-         
-              String groceriesFromFile = groceryListReader.nextLine();
-              //groceryListReader.useDelimiter("\\Z"); 
-              //groceriesArraylist.add(groceriesFromFile);
-              
-              
-              if (groceriesFromFile.contains("\n")){
-                  whiteSpace = true;
-                  System.out.println(whiteSpace);
-              }
-              else{
-                  //System.out.println(groceriesFromFile);
-                  groceriesArraylist.add(groceriesFromFile);
-             
-                  System.out.println(groceriesArraylist);
-
-
-          
-              }              
-              
-              
-              
-             //System.out.println(groceriesFromFile);
-             
-             
-             //System.out.println(groceryListReader.nextLine());
-             
-             //groceriesArraylist.add(groceriesFromFile);
-             
-             //System.out.println(groceriesArraylist);
-        
-         }
-                
-      }
-      */
       
       //this methods opens the groceryList file 
       //this method reads the contents from the groceryList file and puts them 
       //into a arraylist of strings
 
-      public void readFile(){
+      public void scanItems(){
+      
+           List<String> groceriesArraylist = new ArrayList<String>();
+           Iterator<String> groceryIterator = groceriesArraylist.iterator();
+
+
             try{
                BufferedReader groceryListReader = new BufferedReader(new FileReader("grocery_list.txt"));
                String groceriesFromFile = null;
                            
                while((groceriesFromFile = groceryListReader.readLine()) != null){
+                                        
+                    //groceriesArraylist.add(groceriesFromFile);
+                    
+                    //System.out.println("all items: "+groceriesArraylist);
+                    
+                    
+                      //quantityExtract(groceriesFromFile);
+                                            
+                    
                     
                         if(groceriesFromFile.contains("imported")){
                         
                            //System.out.println(groceriesFromFile);
-                           importedGrocerySorter(groceriesFromFile);
+                           //importedGrocerySorter(groceriesFromFile);
+                           isImported = true;
+                           System.out.println("this item is imported:" + groceriesFromFile);
+
+                           //quantityExtract(groceriesFromFile);
                         
                         }
                         else{
                         
-                           unimportedGrocerySorter(groceriesFromFile);
+                           isImported = false;
+                           System.out.println("this item is unimported:" + groceriesFromFile);
+                           //priceExtract(groceriesFromFile);
+
+
+                        
+                           //unimportedGrocerySorter(groceriesFromFile);
                            
                         
                         } 
                         
+                        quantityExtract(groceriesFromFile);
+
+                        priceExtract(groceriesFromFile);
+
+                        untaxableItems(groceriesFromFile);
                         
                         //groceriesArraylist.add(groceriesFromFile);
                        //System.out.println(groceriesArraylist);
@@ -136,90 +104,68 @@ public class groceryStore{
          
          
          
-         /*
-         
-         //public void grocerySorter(List <String> x){
-         
-         public void grocerySorter(String x){
-
-            String keyWord = "1 imported";
-            int importedPosition=0;
-            Iterator<String> groceryIterator = x.iterator();
-                     
-            //for (int i =0; i<x.length; i++){
-            
-            while (groceryIterator.hasNext()) {           
-               //if (x.equals(keyWord)){
-               if (groceryIterator.next().contains(keyWord)){
-                  System.out.println(groceryIterator.next() + "\nposition: "+importedPosition);
-                  
-                 }
-                 importedPosition++;
-            }
-               
-            
-         
-         }
-         */
          
          
-         /*
+         
          //this extracts the quantity(ie the 1st number on each string) from the grocery list
+         //works
          public int quantityExtract(String groceryList){
-         
-            try{
+         //public int quantityExtract(List <String> groceryList){
+
+            ///Iterator<String> groceryIterator = groceryList.iterator();
+
+            //try{
             
-               int groceryQuantity = new Scanner(groceryList).useDelimiter("\\D+").nextInt();
+                       
+               int groceryQuantity = new Scanner(groceryList).useDelimiter("\\D").nextInt();
                System.out.println("Quantity: " +groceryQuantity);
                
-               return groceryQuantity;           
-            }
+               //afterSaleTaxApplied(groceryQuantity);
+               return groceryQuantity;      
             
-            catch(Exception e){
             
-               System.out.println("Could not find quantity");
-            }       
+                          //}
+            
+            //catch(Exception e){
+            
+              // System.out.println("Could not find quantity");
+            //}       
          }
-         */
          
          
-         /*
+         
+         
          //this method extracts the price from the strings from the text files
-         public double priceExtract(String groceryList){
+         //works
+         public void priceExtract(String groceryList){
          
-            double unimportedPrices = 0.0;
-            List <Double> totalUnimportedPrices = new ArrayList<Double>();
+            double groceryPrices = 0.0;
+           
+            List <Double> extractedPricesList = new ArrayList<Double>();
 
          
             //this pattern extracts the doubles from the strings from the text files
             Pattern pricePattern = Pattern.compile("\\d+\\.\\d+");
-            Matcher priceMatcher = pricePattern.matcher(unimported);
+            Matcher priceMatcher = pricePattern.matcher(groceryList);
             
             while(priceMatcher.find()){
             
                
             
-               unimportedPrices = Double.parseDouble(priceMatcher.group(0));
-               totalUnimportedPrices.add(unimportedPrices);
+               groceryPrices = Double.parseDouble(priceMatcher.group(0));
+               extractedPricesList.add(groceryPrices);
                
                               
           
                //System.out.println("Price: " +priceMatcher.group(0));
-               System.out.println("Price: " +totalUnimportedPrices);
+               System.out.println("Price: " +extractedPricesList);
 
                 
-                             
-               //this converts the double into string and formats it to have 2 decimal points 
-               //String z = String.format ("%.2f", unimportedPrices*2);
-               System.out.println("string prices multiplied:"+z);
-
+               salesTaxApplied(extractedPricesList);             
+               
 
                
-                //this replaces all occurrences of "at #.##" and replace them with ":"+ variable
-                String replaceString= unimported.replaceAll("at "+unimportedPrices,":"+z);
-                
-                System.out.println("Replaced string: "+replaceString);
-
+               
 
                //totalUP = unimportedPrices +unimportedPrices;
 
@@ -231,57 +177,213 @@ public class groceryStore{
 
             }
             
-            return totalUnimportedPrices;
-
-         }
-         */
+          }
          
-         public String salesTaxApplied(double groceryPrice){
          
-            
-            //this converts the double into string and formats it to have 2 decimal points 
-            String groceryPriceAfterTax = String.format ("%.2f", groceryPrice);
-            System.out.println("string prices multiplied:"+groceryPriceAfterTax);
-
          
-            return groceryPriceAfterTax;
-         }
          
-         public void untaxableItems (String groceryList ){
+         
+         //this method determines if the grocery items on the grocery list are taxable or not 
+         //by testing if they contain specfic keywords from the word bank (ie food,book,medicine)
+         //works
+         public void untaxableItems (String groceryList){
          
             List<String> untaxableGroceriesArraylist = new ArrayList<String>();
-            untaxableGroceriesArraylist.asList("music","chocolate","book","pills");
-            //untaxableGroceriesArraylist.add("book");
-            //untaxableGroceriesArraylist.add("pills");
-            
-            
-            
-            Iterator<String> groceryIterator = untaxableGroceriesArraylist.iterator();
-                     
-            //for (int i =0; i<x.length; i++){
-            
-            while (groceryIterator.hasNext()) {           
-               if (groceryList.contains(groceryIterator.next())){
-                  isTaxable = false;
-                  //System.out.println(groceryIterator.next() + "\nposition: "+importedPosition);
-                  System.out.println("item isn't taxable");
-                  
-                 }
-                 
-                 else{
-                 
-                     isTaxable = true;
-                     System.out.println("item is taxable");
+            Iterator<String> untaxableGroceryIterator = untaxableGroceriesArraylist.iterator();
 
+            untaxableGroceriesArraylist.add("chocolate");
+            untaxableGroceriesArraylist.add("book");
+            untaxableGroceriesArraylist.add("pills");
+            
+            List<String> groceriesArraylist = new ArrayList<String>();
+            Iterator<String> groceryIterator = untaxableGroceriesArraylist.iterator();
+
+            
+                        
+             groceriesArraylist.add(groceryList);
+             System.out.println("inside:" + groceriesArraylist);
+              // while (untaxableGroceryIterator.hasNext()) {     
+               //if (groceryList.contains(groceryIterator.next())){
+               //if (groceryList.contains(untaxableGroceriesArraylist[0])||groceryList.contains(untaxableGroceriesArraylist[1])||groceryList.contains(untaxableGroceriesArraylist[2]))){
+                 if(groceryList.contains("book")){
+                     isTaxable = false;
+                     //System.out.println("item is a book: " + groceryList);
+                     
                  }
+                 else if (groceryList.contains("pills")){
+                     isTaxable = false;
+                     //System.out.println("item is a medcine: " + groceryList);
+   
+                 
+                 }
+                 
+                 else if (groceryList.contains("chocolate")){
+                      isTaxable = false;
+                      //System.out.println("item is a food: " + groceryList);
+
+                 
+                 }
+               else{
+                     isTaxable = true;
+                     //isImported = false;
+                    // System.out.println("item is taxable: " + groceryList);
+
+              }
                  //importedPosition++;
             }
+        
+         
 
+         
+         
+         
+         //public void salesTaxApplied(double groceryPrice){
+         public void salesTaxApplied(List <Double> groceryPrice){
+         
+            double salesTax=1.0;
+            double totalSalesTax =0.0;
+            double groceryPriceAfterTax = 0.0;
+            double totalGroceryPriceAfterTax = 0.0;
 
+            Iterator<Double> groceryPriceIterator = groceryPrice.iterator();
+           
+            while(groceryPriceIterator.hasNext()){
+            
+               if(isTaxable == true  && isImported == true) {
+               
+                  salesTax = .15;
+                  
+                  //this sums up the amount of sales tax thats applied to each item (ie multiplying the price by a %)
+                  totalSalesTax = totalSalesTax + (groceryPriceIterator.next()*salesTax);
+                  
+                  //this is the individual prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)
+                  //groceryPriceAfterTax = groceryPriceAfterTax +(groceryPriceIterator.next()+(groceryPriceIterator.next()*salesTax));
+                  groceryPriceAfterTax = (groceryPriceIterator.next()+(groceryPriceIterator.next()*salesTax));
+                  
+ 
+                  //this sums up the amount of total prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)
+                  totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + groceryPriceAfterTax;
+   
+                                             
+                   //this converts the double into string and formats it to have 2 decimal points 
+                  String groceryPriceWithTaxApplied = String.format ("%.2f", groceryPriceAfterTax);
+                  System.out.println("string prices multiplied:"+groceryPriceWithTaxApplied);
+                  
+                  System.out.println("total sales taxes:"+ totalSalesTax);
+                  System.out.println("total price after tax :"+  totalGroceryPriceAfterTax);
+   
+   
+               }
+               
+               else if(isTaxable == false && isImported == true ){
+               
+                  salesTax = .05;
+                  //this sums up the amount of sales tax thats applied to each item (ie multiplying the price by a %)
+                  totalSalesTax = totalSalesTax + (groceryPriceIterator.next()*salesTax);
+                  
+                  //this is the individual prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)
+                  //groceryPriceAfterTax = groceryPriceAfterTax +(groceryPriceIterator.next()+(groceryPriceIterator.next()*salesTax));
+                  groceryPriceAfterTax = (groceryPriceIterator.next()+(groceryPriceIterator.next()*salesTax));
+                  
 
+                  //this sums up the amount of total prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)
+                  totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + groceryPriceAfterTax;
+   
+                                             
+                   //this converts the double into string and formats it to have 2 decimal points 
+                  String groceryPriceWithTaxApplied = String.format ("%.2f", groceryPriceAfterTax);
+                  System.out.println("string prices multiplied:"+groceryPriceWithTaxApplied);
+                  
+                  System.out.println("total sales taxes:"+ totalSalesTax);
+                  System.out.println("total price after tax :"+  totalGroceryPriceAfterTax);
+               
+               }
+               
+               else if(isTaxable == true && isImported == false ){
+               //else {
+
+                  salesTax = .10;
+                  
+                 //this sums up the amount of sales tax thats applied to each item (ie multiplying the price by a %)
+                  totalSalesTax = totalSalesTax + (groceryPriceIterator.next()*salesTax);
+                  
+                  //this is the individual prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)
+                  //groceryPriceAfterTax = groceryPriceAfterTax +(groceryPriceIterator.next()+(groceryPriceIterator.next()*salesTax));
+                  //groceryPriceAfterTax = (groceryPriceIterator.next()+(groceryPriceIterator.next()*salesTax));
+                  
+
+                  //this sums up the amount of total prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)
+                  totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + groceryPriceAfterTax;
+   
+                                             
+                   //this converts the double into string and formats it to have 2 decimal points 
+                  //String groceryPriceWithTaxApplied = String.format ("%.2f", groceryPriceAfterTax);
+                  String groceryPriceWithTaxApplied = String.format ("%.2f", (groceryPriceIterator.next()+(groceryPriceIterator.next()*salesTax)));
+
+                  System.out.println("string prices multiplied:"+groceryPriceWithTaxApplied);
+                  
+                  System.out.println("total sales taxes:"+ totalSalesTax);
+                  System.out.println("total price after tax :"+  totalGroceryPriceAfterTax);
+               }
+               
+               else {
+               
+                  
+                 //this sums up the amount of sales tax thats applied to each item (ie multiplying the price by a %)
+                  totalSalesTax = totalSalesTax + (groceryPriceIterator.next()*salesTax);
+                  
+                  //this is the individual prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)
+                  //groceryPriceAfterTax = groceryPriceAfterTax +(groceryPriceIterator.next()+(groceryPriceIterator.next()*salesTax));
+                  groceryPriceAfterTax = (groceryPriceIterator.next()+(groceryPriceIterator.next()*salesTax));
+                  
+                  //this sums up the amount of total prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)
+                  totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + groceryPriceAfterTax;
+   
+                                             
+                   //this converts the double into string and formats it to have 2 decimal points 
+                  String groceryPriceWithTaxApplied = String.format ("%.2f", groceryPriceAfterTax);
+                  System.out.println("string prices multiplied:"+groceryPriceWithTaxApplied);
+                  
+                  System.out.println("total sales taxes:"+ totalSalesTax);
+                  System.out.println("total price after tax :"+  totalGroceryPriceAfterTax);
+
+               
+               
+               }
+
+            
+            
+            }
+               
+                           
+        }
+         
+         /*
+         //this is will finish constructing the reciept after all the other calculations have been made
+         public void afterSaleTaxApplied(String grocerylist, double groceryPrices ){
+         
+             //this converts the double into string and formats it to have 2 decimal points 
+             //String z = String.format ("%.2f", unimportedPrices);
+
+         
+         
+             //this replaces all occurrences of "at #.##" and replace them with ":"+ variable
+                String replaceString = grocerylist.replaceAll("at "+groceryPrices,":"+z);
+                
+                //System.out.println("Replaced string: "+replaceString);
+
+         
          
          }
          
+                  
+        /*
+        
+        
+        
+        
+        
+        
          
          public void importedGrocerySorter(String imported){
          
@@ -305,6 +407,7 @@ public class groceryStore{
             //System.out.println("////////////////////\n"+importedGroceriesArraylist);
 
 
+            /*
             //this scanner will return the 1st integer in the string(ie the amount of 
             try{
             
@@ -347,6 +450,10 @@ public class groceryStore{
          
          }
          
+         
+         
+         
+         /*
          public void unimportedGrocerySorter(String unimported){
          
              unimportedGroceriesArraylist.add(unimported);
@@ -376,6 +483,7 @@ public class groceryStore{
 
             */
             
+            /*
             //this extracts the quantity(ie the 1st number on each string) from the grocery list
             int res = new Scanner(unimported).useDelimiter("\\D+").nextInt();
             //System.out.println("Unimported Quantity: " +res);
@@ -443,6 +551,7 @@ public class groceryStore{
                
 
             }
+            */
             
             /*
             while (groceryIterator.hasNext()){
@@ -470,29 +579,29 @@ public class groceryStore{
             
             }
 
-            */
-         
+                     
          }
-
-
+        */
 
          
          
          
       
-      public void closeFile(){
-           groceryListReader.close();
-
-      }
+         public void closeFile(){
+              groceryListReader.close();
+   
+         }
+         
       
-      
+       
+       
       public static void main(String [] args){
       
          groceryStore object = new groceryStore();
          
          
          //object.openFile();
-         object.readFile();
+         object.scanItems();
          //object.closeFile();
 
 
