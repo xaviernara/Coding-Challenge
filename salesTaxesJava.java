@@ -18,6 +18,8 @@ public class salesTaxesJava{
    final List <Double> extractedPricesList = new ArrayList<Double>();
    final List <Integer> groceryQuantity = new ArrayList<Integer>();
    final List<String> untaxableGroceriesArraylist = new ArrayList<String>();
+   final List <Double> groceryPricesListWithTaxApplied = new ArrayList<Double>();
+
       
       //this methods opens the groceryList file 
       //this method reads the contents from the groceryList file and puts them 
@@ -56,7 +58,7 @@ public class salesTaxesJava{
    
                                       
                   } 
-                  System.out.println(groceriesArraylist); 
+                  //System.out.println(groceriesArraylist); 
 
    
             }
@@ -147,8 +149,8 @@ public class salesTaxesJava{
                 
                salesTaxApplied(extractedPricesList);
             }
-            System.out.println("Price size: " +extractedPricesList.size());
-            System.out.println("Price: " +extractedPricesList);
+            //System.out.println("Price size: " +extractedPricesList.size());
+            //System.out.println("Price: " +extractedPricesList);
             
           }
          
@@ -216,7 +218,7 @@ public class salesTaxesJava{
                          
          }
         
-         System.out.println("untaxable items: "+ untaxableGroceriesArraylist);
+         //System.out.println("untaxable items: "+ untaxableGroceriesArraylist);
 
        }
 
@@ -236,123 +238,108 @@ public class salesTaxesJava{
             
             //Iterator<Double> GPATaxIterator = groceryPriceAfterTax.iterator();
             
-           System.out.println("The groceryPriceList has " + groceryPrice.size() + " elements");
+           //System.out.println("The groceryPriceList has " + groceryPrice.size() + " elements");
            
             //while(groceryPriceIterator.hasNext()){
             for (double index : groceryPrice ){
-               System.out.println("isTaxable & isImported");
-               if(isTaxable == true  && isImported == true) {
-                  System.out.println("Inside first");
+                if(isTaxable == true  && isImported == true) {
+                  //System.out.println("isTaxable & isImported");
                   salesTax = .15;
                   
                   //this sums up the amount of sales tax thats applied to each item (ie multiplying the price by a %)
-                  //totalSalesTax = totalSalesTax + (groceryPriceIterator.next()*salesTax);
-                  totalSalesTax = totalSalesTax + (index*salesTax);
+                  //totalSalesTax = totalSalesTax + (index*salesTax);
                   
                   //this is the individual prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)                  
-                  //groceryPriceAfterTax.add((groceryPriceIterator.next()+(groceryPriceIterator.next()*salesTax)));
                   groceryPriceAfterTax = ((index+(index*salesTax)));
-
+                  //groceryPricesListWithTaxApplied.add(groceryPriceAfterTax);
+                  
  
                   //this sums up the amount of total prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)
-                  //totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + GPATaxIterator.next();
-                  totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + groceryPriceAfterTax;
+                  //totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + groceryPriceAfterTax;
                                                 
                    //this converts the double into string and formats it to have 2 decimal points 
-                  //String groceryPriceWithTaxApplied = String.format ("%.2f", groceryPriceAfterTax);
-                  //System.out.println("string prices multiplied: "+groceryPriceWithTaxApplied);
-                  System.out.printf("groceryPriceAfterTax: %.2f", groceryPriceAfterTax);
-
-                  
-                  System.out.println("total sales taxes: "+ totalSalesTax);
-                  System.out.println("total prices after tax :"+  totalGroceryPriceAfterTax);
-   
+                  //System.out.printf("groceryPriceAfterTax: %.2f\n", groceryPriceAfterTax); 
+                  /*                
+                  System.out.printf("total sales taxes:  %.2f\n", totalSalesTax);
+                  System.out.printf("total prices after tax : %.2f\n",  totalGroceryPriceAfterTax);
+                  */
    
                }
                
                else if(isTaxable == false && isImported == true ){
-               System.out.println("is not Taxable & isImported");
+               //System.out.println("is not Taxable & isImported");
 
                   salesTax = .05;
                    //this sums up the amount of sales tax thats applied to each item (ie multiplying the price by a %)
-                  //totalSalesTax = totalSalesTax + (groceryPriceIterator.next()*salesTax);
-                  totalSalesTax = totalSalesTax + (index*salesTax);
+                  //totalSalesTax = totalSalesTax + (index*salesTax);
                   
                   //this is the individual prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)                  
-                  //groceryPriceAfterTax.add((groceryPriceIterator.next()+(groceryPriceIterator.next()*salesTax)));
                   groceryPriceAfterTax = ((index+(index*salesTax)));
-
+                  //groceryPricesListWithTaxApplied.add(groceryPriceAfterTax);
  
                   //this sums up the amount of total prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)
-                  //totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + GPATaxIterator.next();
-                  totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + groceryPriceAfterTax;
+                  //totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + groceryPriceAfterTax;
                                                 
                    //this converts the double into string and formats it to have 2 decimal points 
-                  //String groceryPriceWithTaxApplied = String.format ("%.2f", groceryPriceAfterTax);
-                  //System.out.println("string prices multiplied: "+groceryPriceWithTaxApplied);
-                  System.out.printf("groceryPriceAfterTax: %.2f", groceryPriceAfterTax);
-
-                  
-                  System.out.println("total sales taxes: "+ totalSalesTax);
-                  System.out.println("total prices after tax :"+  totalGroceryPriceAfterTax);
+                  //System.out.printf("groceryPriceAfterTax: %.2f\n", groceryPriceAfterTax);                 
+                   /*                
+                  System.out.printf("total sales taxes:  %.2f\n", totalSalesTax);
+                  System.out.printf("total prices after tax : %.2f\n",  totalGroceryPriceAfterTax);
+                  */
                }
                
                else if(isTaxable == true && isImported == false ){
-                  System.out.println("isTaxable & is not Imported");
+                 //System.out.println("isTaxable & is not Imported");
 
                   salesTax = .10;
                   
                  //this sums up the amount of sales tax thats applied to each item (ie multiplying the price by a %)
-                  //totalSalesTax = totalSalesTax + (groceryPriceIterator.next()*salesTax);
-                  totalSalesTax = totalSalesTax + (index*salesTax);
+                  //totalSalesTax = totalSalesTax + (index*salesTax);
                   
                   //this is the individual prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)                  
-                  //groceryPriceAfterTax.add((groceryPriceIterator.next()+(groceryPriceIterator.next()*salesTax)));
                   groceryPriceAfterTax = ((index+(index*salesTax)));
-
+                  //groceryPricesListWithTaxApplied.add(groceryPriceAfterTax);
  
                   //this sums up the amount of total prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)
-                  //totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + GPATaxIterator.next();
-                  totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + groceryPriceAfterTax;
+                  //totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + groceryPriceAfterTax;
                                                 
                    //this converts the double into string and formats it to have 2 decimal points 
-                  //String groceryPriceWithTaxApplied = String.format ("%.2f", groceryPriceAfterTax);
-                  //System.out.println("string prices multiplied: "+groceryPriceWithTaxApplied);
-                  System.out.printf("groceryPriceAfterTax: %.2f", groceryPriceAfterTax);
-
-                  
-                  System.out.println("total sales taxes: "+ totalSalesTax);
-                  System.out.println("total prices after tax :"+  totalGroceryPriceAfterTax);
+                  //System.out.printf("groceryPriceAfterTax: %.2f\n", groceryPriceAfterTax);                 
+                  /*                
+                  System.out.printf("total sales taxes:  %.2f\n", totalSalesTax);
+                  System.out.printf("total prices after tax : %.2f\n",  totalGroceryPriceAfterTax);
+                  */
                }
                
                else {
-               System.out.println("is not Taxable & is not Imported");
+               //System.out.println("is not Taxable & is not Imported");
 
-                  
+                  salesTax = 0;
                   //this sums up the amount of sales tax thats applied to each item (ie multiplying the price by a %)
-                  //totalSalesTax = totalSalesTax + (groceryPriceIterator.next()*salesTax);
-                  totalSalesTax = totalSalesTax + (index*salesTax);
+                  //totalSalesTax = totalSalesTax + (index*salesTax);
                   
                   //this is the individual prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)                  
-                  //groceryPriceAfterTax.add((groceryPriceIterator.next()+(groceryPriceIterator.next()*salesTax)));
-                  groceryPriceAfterTax = ((index+(index*salesTax)));
-
+                  groceryPriceAfterTax = index;
+                  //groceryPricesListWithTaxApplied.add(groceryPriceAfterTax);
  
                   //this sums up the amount of total prices after sales tax has been applied to each item (ie multiplying the price by a % and adding that to the orginal number)
-                  //totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + GPATaxIterator.next();
-                  totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + groceryPriceAfterTax;
+                  //totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + groceryPriceAfterTax;
                                                 
                    //this converts the double into string and formats it to have 2 decimal points 
-                  //String groceryPriceWithTaxApplied = String.format ("%.2f", groceryPriceAfterTax);
-                  //System.out.println("string prices multiplied: "+groceryPriceWithTaxApplied);
-                  System.out.printf("groceryPriceAfterTax: %.2f", groceryPriceAfterTax);
-
-                  
-                  System.out.println("total sales taxes: "+ totalSalesTax);
-                  System.out.println("total prices after tax :"+  totalGroceryPriceAfterTax);
-               
+                  //System.out.printf("groceryPriceAfterTax: %.2f\n", groceryPriceAfterTax);                 
+                   /*                
+                  System.out.printf("total sales taxes:  %.2f\n", totalSalesTax);
+                  System.out.printf("total prices after tax : %.2f\n",  totalGroceryPriceAfterTax);
+                  */
                }
+               groceryPricesListWithTaxApplied.add(groceryPriceAfterTax);
+               totalSalesTax = totalSalesTax + (index*salesTax);
+               totalGroceryPriceAfterTax = totalGroceryPriceAfterTax + groceryPriceAfterTax;
             }
+                  System.out.println("groceryPriceAfterTax arraylist: "+ groceryPricesListWithTaxApplied); 
+                  System.out.printf("total sales taxes:  %.2f\n", totalSalesTax);
+                  System.out.printf("total prices after tax : %.2f\n", totalGroceryPriceAfterTax);
+
            }
                
                            
@@ -360,10 +347,14 @@ public class salesTaxesJava{
          
          
          //this is will finish constructing the reciept after all the other calculations have been made
-         public void afterSaleTaxApplied(String grocerylist, List <Double> groceryPrices){
+         public void afterSaleTaxApplied(String grocerylist, List <Double>  groceryPricesListWithTaxApplied){
                
                //Iterator<String> untaxableGroceryIterator = untaxableGroceriesArraylist.iterator();
                
+               for (String string: groceriesArraylist ){
+               
+               
+               }
                       
          
          
