@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.Iterator;
 
-public class groceryStore{
+public class example{
 
    private Scanner groceryListReader;
    final List<String> groceriesArraylist = new ArrayList<String>();
@@ -50,9 +50,9 @@ public class groceryStore{
                         if(groceriesFromFile.contains("imported")){
                         
                            //System.out.println(groceriesFromFile);
-                           //importedGrocerySorter(groceriesFromFile);
+                           importedGrocerySorter(groceriesFromFile);
                            isImported = true;
-                           System.out.println("this item is imported:" + groceriesFromFile);
+                           //System.out.println("this item is imported:" + groceriesFromFile);
 
                            //quantityExtract(groceriesFromFile);
                         
@@ -60,22 +60,15 @@ public class groceryStore{
                         else{
                         
                            isImported = false;
-                           System.out.println("this item is unimported:" + groceriesFromFile);
-                           //priceExtract(groceriesFromFile);
-
-
-                        
-                           //unimportedGrocerySorter(groceriesFromFile);
+                           unimportedGrocerySorter(groceriesFromFile);
                            
                         
+                           //System.out.println("this item is unimported:" + groceriesFromFile);
+
+
                         } 
                         
-                        quantityExtract(groceriesFromFile);
-
-                        priceExtract(groceriesFromFile);
-
-                        untaxableItems(groceriesFromFile);
-                        
+                                              
                         //groceriesArraylist.add(groceriesFromFile);
                        //System.out.println(groceriesArraylist);
                     
@@ -188,6 +181,7 @@ public class groceryStore{
          //works
          public void untaxableItems (String groceryList){
          
+         
             List<String> untaxableGroceriesArraylist = new ArrayList<String>();
             Iterator<String> untaxableGroceryIterator = untaxableGroceriesArraylist.iterator();
 
@@ -207,6 +201,7 @@ public class groceryStore{
                //if (groceryList.contains(untaxableGroceriesArraylist[0])||groceryList.contains(untaxableGroceriesArraylist[1])||groceryList.contains(untaxableGroceriesArraylist[2]))){
                  if(groceryList.contains("book")){
                      isTaxable = false;
+                     System.out.println("taxable: "+  isTaxable);
                      //System.out.println("item is a book: " + groceryList);
                      
                  }
@@ -360,7 +355,7 @@ public class groceryStore{
          
          /*
          //this is will finish constructing the reciept after all the other calculations have been made
-         public void afterSaleTaxApplied(String grocerylist, double groceryPrices ){
+         public void afterSaleTaxApplied(String grocerylist, double groceryPrices,  ){
          
              //this converts the double into string and formats it to have 2 decimal points 
              //String z = String.format ("%.2f", unimportedPrices);
@@ -374,10 +369,8 @@ public class groceryStore{
 
          
          
-         }
-         
-                  
-        /*
+         }     
+        */
         
         
         
@@ -397,17 +390,17 @@ public class groceryStore{
             if(m.find()){
                System.out.println("Hello "+m.find());
             }
-            /*
+            
             if(imported.matches(".*\\d+.*")){
                System.out.println(imported);
             }
-            
             */
+            
             //System.out.println(imported);
             //System.out.println("////////////////////\n"+importedGroceriesArraylist);
 
 
-            /*
+            
             //this scanner will return the 1st integer in the string(ie the amount of 
             try{
             
@@ -453,24 +446,21 @@ public class groceryStore{
          
          
          
-         /*
+         
          public void unimportedGrocerySorter(String unimported){
          
              unimportedGroceriesArraylist.add(unimported);
              System.out.println("ALL UNINPORTED: "+unimported);
-             //System.out.println("////////////////////\n"+unimportedGroceriesArraylist);
-             
-             /*
-             Scanner scanner = new Scanner(unimported);
+              Scanner scanner = new Scanner(unimported);
 
-             
+             /*
              //this scanner will return the 1st integer in the string(ie the amount of 
             try{
             
                while(scanner.hasNextDouble()){
-                 //double res = scanner.useDelimiter("\\D+").nextDouble();
-                 //System.out.println(res);
-                  System.out.println(scanner.nextDouble());
+                 int res = scanner.useDelimiter("\\D+").nextDouble();
+                 System.out.println(res);
+                  //System.out.println(scanner.nextDouble());
                  }
                  
                  
@@ -480,13 +470,13 @@ public class groceryStore{
             
                System.out.println("Could not find number");
             }
-
             */
             
-            /*
+            
+            
             //this extracts the quantity(ie the 1st number on each string) from the grocery list
             int res = new Scanner(unimported).useDelimiter("\\D+").nextInt();
-            //System.out.println("Unimported Quantity: " +res);
+            System.out.println("Unimported Quantity: " +res);
 
             
             
@@ -499,16 +489,12 @@ public class groceryStore{
             Matcher priceMatcher = pricePattern.matcher(unimported);
             
             //Pattern x = Pattern.parsePattern(unimported.substring(0,1));
-            //String x = unimported.substring(0,1);
-            //System.out.println("hey: "+x);
-
-            //this replaces all occurrences of "at #.##" and replace them with ":"+z
-            //String replaceString= x.replaceAll("at "unimportedPrices+,":"+z);
-
-                        
-             //this converts the double into string and formats it to have 2 decimal points 
-             //String z = String.format ("%.2f", unimportedPrices);
+            String x = unimported.substring(0,1);
+            System.out.println("string quantity: "+x);
             
+            
+                        
+                         
             List <Double> totalUnimportedPrices = new ArrayList<Double>();
             Iterator<Double> groceryIterator = totalUnimportedPrices.iterator();
 
@@ -523,15 +509,15 @@ public class groceryStore{
                               
           
                //System.out.println("Price: " +priceMatcher.group(0));
-               System.out.println("Price: " +totalUnimportedPrices);
-
+               //System.out.println("Price: " +totalUnimportedPrices);
+               System.out.println("Unimported Price: " +totalUnimportedPrices );
                
                
               
-               //System.out.println("Unimported Price: " +totalUnimportedPrices );
+               
                
                //this converts the double into string and formats it to have 2 decimal points 
-               String z = String.format ("%.2f", unimportedPrices*2);  
+               String z = String.format ("%.2f", unimportedPrices);  
                System.out.println("string prices multiplied:"+z);
 
 
@@ -551,7 +537,7 @@ public class groceryStore{
                
 
             }
-            */
+            
             
             /*
             while (groceryIterator.hasNext()){
@@ -562,26 +548,26 @@ public class groceryStore{
 
                }
 
-            */
+           
             
             
             
-            /*
+            
             //this pattern extracts the unimported item name from the strings from the text files
             Pattern itemNamePattern = Pattern.compile(res+"(.*?)"+"at");
             Matcher itemNameMatcher = pricePattern.matcher(unimported);
-            */
+            
 
             
-            /*          
+                   
               while(itemNameMatcher.find()){
                System.out.println("Item name: "+itemNameMatcher.group(0));
             
             }
 
-                     
+            */         
          }
-        */
+        
 
          
          
@@ -597,7 +583,7 @@ public class groceryStore{
        
       public static void main(String [] args){
       
-         groceryStore object = new groceryStore();
+         example object = new example();
          
          
          //object.openFile();

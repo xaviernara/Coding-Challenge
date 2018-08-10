@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Canvas xmlns="http://www.jgrasp.org">
+  <Language>Java</Language>
+  <ShowTypes>false</ShowTypes>
+  <Version>2</Version>
+  <Grid>
+    <Snap>true</Snap>
+    <Show>false</Show>
+  </Grid>
+  <Scope id="0">
+    <Name>priceExtract</Name>
+    <Signature>(Ljava/lang/String;)V</Signature>
+    <DeclaringType>groceryStore</DeclaringType>
+    <Depth>2</Depth>
+  </Scope>
+  <Scope id="1">
+    <Name>salesTaxApplied</Name>
+    <Signature>(Ljava/util/List;)V</Signature>
+    <DeclaringType>groceryStore</DeclaringType>
+    <Depth>3</Depth>
+  </Scope>
+  <Frame>
+    <Bounds>
+      <AutoSize>true</AutoSize>
+      <X>230</X>
+      <Y>150</Y>
+      <W>662</W>
+      <H>213</H>
+    </Bounds>
+    <Viewer>
+      <ScopeID>0</ScopeID>
+      <Expression>`local java.util.List` extractedPricesList</Expression>
+      <ViewerClass>java__lang__Object_LinkedView</ViewerClass>
+    </Viewer>
+  </Frame>
+  <Frame>
+    <Bounds>
+      <AutoSize>true</AutoSize>
+      <X>460</X>
+      <Y>410</Y>
+      <W>298</W>
+      <H>164</H>
+    </Bounds>
+    <Viewer>
+      <ScopeID>1</ScopeID>
+      <Expression>`local java.util.List` groceryPriceAfterTax</Expression>
+      <ViewerClass>java__lang__Object_LinkedView</ViewerClass>
+    </Viewer>
+  </Frame>
+  <Size>
+    <W>1080</W>
+    <H>720</H>
+  </Size>
+  <ESize>
+    <W>1080</W>
+    <H>720</H>
+  </ESize>
+</Canvas>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectFrameBounds">
+    <option name="x" value="30" />
+    <option name="y" value="30" />
+    <option name="width" value="2100" />
+    <option name="height" value="1296" />
+  </component>
+  <component name="RunManager">
+    <configuration name="groceryStore" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="groceryStore" />
+      <module name="Coding-Challenge" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.groceryStore" />
+      </list>
+    </recent_temporary>
+  </component>
+</project>
